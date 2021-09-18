@@ -9,6 +9,7 @@ import UIKit
 
 class CalculatorVC: UIViewController {
     
+    var line = ""
     
     @IBOutlet weak var displayLabel: UILabel!
     
@@ -21,11 +22,32 @@ class CalculatorVC: UIViewController {
     
     @IBAction func actionButtonPressed(_ sender: UIButton) {
         
+        guard let action = sender.currentTitle else { return }
         
+        switch action {
+        case "AC":
+            displayLabel.text = "0"
+            line = ""
+        case "+":
+            displayLabel.text = "Ooops"
+        default:
+            displayLabel.text = "0"
+
+        }
     }
     
     
     @IBAction func numberButtonPressed(_ sender: UIButton) {
+        
+        guard let number = sender.currentTitle else { return }
+        
+        line += number
+        
+        displayLabel.text = line
+        
+        
+                
+        
         
         
     }
