@@ -5,6 +5,8 @@
 
 :octocat:  **Objective of project:**
 
+:heavy_check_mark: using computed properties (get/set)
+
 :heavy_check_mark:  advance swift structures
 
 :heavy_check_mark:  advance internal / external parameters
