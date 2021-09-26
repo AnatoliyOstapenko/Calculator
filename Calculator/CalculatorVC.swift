@@ -9,11 +9,31 @@ import UIKit
 
 class CalculatorVC: UIViewController {
     
-    var line = ""
-    
     @IBOutlet weak var displayLabel: UILabel!
     
+    private var isFinishedTypingNumber = true
+    
+    private var displayValue: Double {
+        get {
+            guard let number = Double(displayLabel.text!) else { fatalError("error in displayValue") }
+            print("display value is \(number)")
+            return number
+        }
+        set {
+            if newValue == 0 {
+                displayLabel.text = String(format: "%.0f", newValue)
+                isFinishedTypingNumber = true
+                print(displayLabel.text!)
+            } else {
+                displayLabel.text = String(newValue)
+            }
+            
 
+        }
+    }
+
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,14 +44,16 @@ class CalculatorVC: UIViewController {
         
         guard let action = sender.currentTitle else { return }
         
+        // operation block of code
         switch action {
         case "AC":
-            displayLabel.text = "0"
-            line = ""
-        case "+":
-            displayLabel.text = "Ooops"
+            displayValue = 0
+        case "+/-":
+            displayValue *= -1
+        case "%":
+            displayValue = displayValue / 100
         default:
-            displayLabel.text = "0"
+            displayValue = 0
 
         }
     }
@@ -41,18 +63,28 @@ class CalculatorVC: UIViewController {
         
         guard let number = sender.currentTitle else { return }
         
-        line += number
-        
-        displayLabel.text = line
-        
-        
+        if isFinishedTypingNumber == true {
+            displayLabel.text = number
+            isFinishedTypingNumber = false
+        } else {
+            
+            // magic block of code:
+            if number == "." {
                 
-        
-        
-        
-    }
-    
-    
+                // floor remove the fractional part and round down
+                let isInt = floor(displayValue) == displayValue
 
+                if !isInt {
+                    return
+                }
+                
+            } // magic is over
+
+
+            displayLabel.text! += number
+            
+            
+        }
+    }
 }
 
