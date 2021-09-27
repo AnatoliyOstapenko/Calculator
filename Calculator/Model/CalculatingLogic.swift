@@ -7,10 +7,11 @@
 
 import Foundation
 
-class CalculatingLogic {
+struct CalculatingLogic {
     
     var label: String = ""
     var finish: Bool = true
+
     
     var displayValue: Double {
         get {
@@ -28,7 +29,7 @@ class CalculatingLogic {
         }
     }
     
-    func action(_ action: String) {
+    mutating func action(_ action: String) {
         
         switch action {
         case "AC":
@@ -43,7 +44,7 @@ class CalculatingLogic {
         
     }
     
-    func number(_ number: String) {
+    mutating func number(_ number: String) {
         
         if finish == true {
             label = number
