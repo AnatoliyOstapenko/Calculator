@@ -38,8 +38,7 @@ struct CalculatingLogic {
     
     private func performTwoNumCalculation(n2: Double) -> Double? {
         
-        if let n1 = intermediateCalculation?.n1,
-            let operation = intermediateCalculation?.calcMethod {
+        guard let n1 = intermediateCalculation?.n1, let operation = intermediateCalculation?.calcMethod else { return nil }
             
             switch operation {
             case "+":
@@ -53,8 +52,8 @@ struct CalculatingLogic {
             default:
                 fatalError("The operation passed in does not match any of the cases.")
             }
-        }
-        return nil
+        
+      
     }
     
 }

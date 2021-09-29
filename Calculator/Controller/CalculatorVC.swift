@@ -42,12 +42,12 @@ class CalculatorVC: UIViewController {
         
         calculator.setNumber(displayValue)
         
-        if let calcMethod = sender.currentTitle {
+        guard let text = sender.currentTitle else { return }
  
-            if let result = calculator.calculate(symbol: calcMethod) {
+            if let result = calculator.calculate(symbol: text) {
                 displayValue = result
             }
-        }
+        
     }
     
     
@@ -55,7 +55,7 @@ class CalculatorVC: UIViewController {
         
         //What should happen when a number is entered into the keypad
         
-        if let numValue = sender.currentTitle {
+        guard let numValue = sender.currentTitle else { return }
             
             if isFinishedTypingNumber {
                 displayLabel.text = numValue
@@ -72,7 +72,7 @@ class CalculatorVC: UIViewController {
                 }
                 displayLabel.text = displayLabel.text! + numValue
             }
-        }
+        
 
         
 
